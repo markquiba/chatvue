@@ -29,12 +29,15 @@ Route::post('/messages', function () {
 	//Store the new message
 	$user = Auth::user();
 
-	$user->messages()->create([
+	$message = $user->messages()->create([
 		'message' => request()->get('message')
 	]);
 
+	//Announce that a new message has been posted
+	broadcast(new MessagePosted($message, $user))->toOthers();
+
 	return ['status' => 'OK'];
-	// return App\Message::with('user')->get();
+
 })->middleware('auth');
 
 Auth::routes();

@@ -29,7 +29,7 @@ const app = new Vue({
     		this.messages.push(message);
     		// Persist to the database
             axios.post('/messages', message).then(response => {
-                
+
             })
     	}
     },
@@ -37,5 +37,17 @@ const app = new Vue({
         axios.get('/messages').then(response => {
             this.messages = response.data;
         });
+
+        Echo.join('chatroom')
+            //.here()
+            //.joining()
+            //.leaving()
+            .listen('MessagePosted', (e) => {
+
+                this.messages.push({
+                    message: e.message.message,
+                    user: e.user
+                });
+            });
     }
 });

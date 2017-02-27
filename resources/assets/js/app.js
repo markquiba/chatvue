@@ -29,5 +29,10 @@ const app = new Vue({
     		this.messages.push(message);
     		// Persist to the database
     	}
+    },
+    created() {
+        axios.get('/messages').then(response => {
+            this.messages = response.data;
+        });
     }
 });

@@ -28,6 +28,9 @@ const app = new Vue({
     		// Add to existing messages
     		this.messages.push(message);
     		// Persist to the database
+            axios.post('/messages', message).then(response => {
+                
+            })
     	}
     },
     created() {

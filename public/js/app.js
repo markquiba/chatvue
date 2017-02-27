@@ -11256,23 +11256,24 @@ Vue.component('chat-log', __webpack_require__(57));
 Vue.component('chat-composer', __webpack_require__(62));
 
 var app = new Vue({
-  el: '#app',
-  data: {
-    messages: [{
-      message: "Hey!",
-      user: "Vito"
-    }, {
-      message: "Yo!",
-      user: "Armel"
-    }]
-  },
-  methods: {
-    addMessage: function addMessage(message) {
-      // Add to existing messages
-      this.messages.push(message);
-      // Persist to the database
+    el: '#app',
+    data: {
+        messages: []
+    },
+    methods: {
+        addMessage: function addMessage(message) {
+            // Add to existing messages
+            this.messages.push(message);
+            // Persist to the database
+        }
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/messages').then(function (response) {
+            _this.messages = response.data;
+        });
     }
-  }
 });
 
 /***/ }),
@@ -31865,7 +31866,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('p', [_vm._v(_vm._s(_vm.message.message))]), _vm._v(" "), _c('small', [_vm._v(_vm._s(_vm.message.user))])])
+  return _c('div', [_c('p', [_vm._v(_vm._s(_vm.message.message))]), _vm._v(" "), _c('small', [_vm._v(_vm._s(_vm.message.user.name))])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -41410,6 +41411,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
 	props: ['messages']
@@ -41420,7 +41424,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(36)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.empty {\n\tpadding: 1rem;\n\ttext-align: center;\n}\n", ""]);
 
 /***/ }),
 /* 57 */
@@ -41467,13 +41471,21 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "chat-log"
-  }, _vm._l((_vm.messages), function(message) {
+  }, [_vm._l((_vm.messages), function(message) {
     return _c('chat-message', {
       attrs: {
         "message": message
       }
     })
-  }))
+  }), _vm._v(" "), _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.messages.length === 0),
+      expression: "messages.length === 0"
+    }],
+    staticClass: "empty"
+  }, [_vm._v("\n\t\tNothing here yet!\n\t")])], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -41514,7 +41526,7 @@ if(false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -41534,12 +41546,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		sendMessage: function sendMessage() {
 			this.$emit('messagesent', {
 				message: this.messageText,
-				user: "Mark Quiba"
+				user: {
+					name: $('.navbar-right .dropdown-toggle').text()
+				}
 			});
 			this.messageText = '';
 		}
 	}
 };
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(8)))
 
 /***/ }),
 /* 61 */

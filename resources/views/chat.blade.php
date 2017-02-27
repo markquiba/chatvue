@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Chat</title>
-	<script>
-	    window.Laravel =  <?php echo json_encode([
-	        'csrfToken' => csrf_token(),
-	    ]); ?>
-    </script>
+@extends('layouts.app')
 
-	<link rel="stylesheet" type="text/css" href="css/app.css">
-</head>
-<body>
+@section('content')
 	<div id="app">
-		<h1>Chatroom</h1>
-		<chat-log :messages="messages"></chat-log>
-		<chat-composer v-on:messagesent="addMessage"></chat-composer>
+		<div class="container">
+		    <div class="row">
+		        <div class="col-md-8 col-md-offset-2">
+		            <div class="panel panel-default">
+		                <div class="panel-heading">Chatroom</div>
+
+		                <div class="panel-body">
+		                    <chat-log :messages="messages"></chat-log>
+		                    <chat-composer v-on:messagesent="addMessage"></chat-composer>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
 	</div>
-	<script src="js/app.js" charset="utf-8"></script>
-</body>
-</html>
+@endsection

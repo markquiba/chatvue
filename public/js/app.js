@@ -41546,7 +41546,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(36)();
-exports.push([module.i, "\n.chat-composer {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n}\n.chat-composer input {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1 auto;\n\t        flex: 1 auto;\n}\n.chat-composer button {\n\tborder-radius: 0;\n}\n", ""]);
+exports.push([module.i, "\n.chat-composer {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n}\n.chat-composer input {\n\t-webkit-box-flex: 1;\n\t    -ms-flex: 1 auto;\n\t        flex: 1 auto;\n\tpadding-left: .5rem 1rem;\n}\n.chat-composer button {\n\tborder-radius: 0;\n}\n", ""]);
 
 /***/ }),
 /* 62 */

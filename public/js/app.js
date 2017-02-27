@@ -11265,6 +11265,7 @@ var app = new Vue({
             // Add to existing messages
             this.messages.push(message);
             // Persist to the database
+            axios.post('/messages', message).then(function (response) {});
         }
     },
     created: function created() {
